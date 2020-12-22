@@ -27,14 +27,16 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column     | Type   | Options                   |
-| ---------- | ------ | ------------------------- |
-| nickname   | string | null: false               |
-| email      | string | null: false, unique: true |
-| password   | string | null: false               |
-| first_name | string | null: false               |
-| last_name  | string | null: false               |
-| birthday   | date   | null: false               |
+| Column               | Type   | Options                   |
+| -------------------- | ------ | ------------------------- |
+| nickname             | string | null: false               |
+| email                | string | null: false, unique: true |
+| encrypted_password   | string | null: false               |
+| first_name(kanji)    | string | null: false               |
+| last_name(kanji)     | string | null: false               |
+| first_name(katakana) | string | null: false               |
+| first_name(katakana) | string | null: false               |
+| birthday             | date   | null: false               |
 
 ### Association
 
@@ -43,22 +45,22 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column        | Type          | Options                        |
-| ------------- | ------------- | ------------------------------ |
-| name          | string        | null: false                    |
-| price         | text          | null: false                    |
-| image         | ActiveStorage |                                |
-| user          | references    | null: false, foreign_key: true |
-| category      | ActiveHash    |                                |
-| condition     | ActiveHash    |                                |
-| shipping_cost | ActiveHash    |                                |
-| shipping_area | ActiveHash    |                                |
-| days_to_ship  | ActiveHash    |                                |
+| Column           | Type          | Options                        |
+| ---------------- | ------------- | ------------------------------ |
+| name             | string        | null: false                    |
+| price            | integer       | null: false                    |
+| description      | text          | null: false                    |
+| user             | references    | null: false, foreign_key: true |
+| category_id      | integer       | null: false                    |
+| condition_id     | integer       | null: false                    |
+| shipping_cost_id | integer       | null: false                    |
+| shipping_area_id | integer       | null: false                    |
+| days_to_ship_id  | integer       | null: false                    |
 
 ### Association
 
-- has_many   :purchases
-- has_one    :user
+- has_one      :purchases
+- belongs_to    :user
 
 ## purchases テーブル
 
@@ -78,12 +80,12 @@ Things you may want to cover:
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | purchase      | references | null: false, foreign_key: true |
-| postal_code   | integer    | null: false                    |
+| postal_code   | string     | null: false                    |
 | prefectures   | ActiveHash |                                |
 | municipality  | string     | null: false                    |
 | house_num     | string     | null: false                    |
 | building_name | string     |                                |
-| phone_num     | integer    | null: false                    |
+| phone_num     | string    | null: false                    |
 
 ### Association
 

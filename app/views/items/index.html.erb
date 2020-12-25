@@ -117,6 +117,7 @@
     <%= link_to '新規投稿商品', new_item_path, class: "subtitle" %>
     <ul class='item-lists'>
     
+      <% if @items.length != 0 %>
       <% @items.each do |item| %>
       <li class='list'>
         <%= link_to "#" do %>
@@ -145,6 +146,30 @@
         </div>
         <% end %>
       </li>
+      <% end %>
+
+      <% else %>
+
+      <li class='list'>
+        <%= link_to "#" do %>
+        <div class='item-img-content'>
+          <%= image_tag "IMG_1066.jpeg" , class: "item-img" %>
+        </div>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= "ダミー商品" %>
+          </h3>
+          <div class='item-price'>
+            <span><%= 1000 %>円<br><%= "着払い(購入者負担)" %></span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </li>
+
       <% end %>
     </ul>
   </div>

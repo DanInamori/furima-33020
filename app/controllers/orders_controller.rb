@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
+before_action :authenticate_user!
 before_action :set_order, only: [:index, :create]
+before_action :move_to_index, only: [:index, :create]
 
   def index
     @order_data = OrderData.new
@@ -19,6 +21,13 @@ before_action :set_order, only: [:index, :create]
   private
   def order_params
     params.require(:order_data).permit(:postal_code, :prefecture_id, :municipality, :house_num, :building_name, :phone_num).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token] )
+  end
+
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    if (current_user.id == @item.user_id) || (@item.order.present?)
+      redirect_to root_path
+    end
   end
 
   def set_order

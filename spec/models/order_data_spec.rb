@@ -65,6 +65,11 @@ RSpec.describe OrderData, type: :model do
         @order_data.valid?
         expect(@order_data.errors.full_messages).to include("Phone num Too long")
       end
+      it "phone_numが半角数字以外のとき購入できない" do
+        @order_data.phone_num = "１１１１１１１１１１１"
+        @order_data.valid?
+        expect(@order_data.errors.full_messages).to include("Phone num Half-width number")
+      end
       it "tokenが存在しないとき購入できない" do
         @order_data.token = nil
         @order_data.valid?

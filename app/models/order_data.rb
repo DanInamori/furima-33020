@@ -8,10 +8,9 @@ class OrderData
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :municipality
     validates :house_num
-    validates :phone_num, length: { maximum: 11, message: 'Too long' }
+    validates :phone_num, length: { maximum: 11, message: 'Too long' },  numericality: { with: /\A[0-9]+\z/, message: "Half-width number"}
     validates :user_id
     validates :item_id
-
   end
   
 
